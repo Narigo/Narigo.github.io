@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var handlebars = require('gulp-compile-handlebars');
+var ghPages = require('gulp-gh-pages');
 var markdown = require('gulp-markdown');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
@@ -16,6 +17,7 @@ gulp.task('build:scss', compileSass);
 gulp.task('build', ['build:assets', 'build:blog', 'build:js', 'build:scss']);
 
 gulp.task('dev', ['build'], watcher);
+gulp.task('deploy', ['build'], deploy);
 
 gulp.task('clean', cleaner);
 
@@ -90,3 +92,7 @@ function cleaner(cb) {
   del([outDir], cb);
 }
 
+function deploy() {
+  return gulp.src(outDir + '/**')
+    .pipe(ghPages());
+}
