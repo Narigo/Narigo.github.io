@@ -22,6 +22,7 @@ gulp.task('deploy', ['build'], deploy);
 gulp.task('clean', cleaner);
 
 var outDir = 'out';
+var posts = [];
 
 function watcher() {
   browserSync({
@@ -43,7 +44,7 @@ function copyAssets() {
 
 function createBlogIndex() {
   return gulp.src(['src/blog/index.html'])
-    .pipe(handlebars({posts : ['not', 'done', 'yet']}, {
+    .pipe(handlebars({posts : posts}, {
       partials : {posts : '{{{posts}}}'}
     }))
     .pipe(rename(function (p) {
@@ -60,6 +61,7 @@ function compileBlogPosts() {
       var matched = /^(\d{4})-(\d\d)-(\d\d)-(.*)$/.exec(p.basename);
       p.dirname = matched ? matched.slice(1, 4).join('/') : p.dirname;
       p.basename = matched ? matched[4] : p.basename;
+      posts.push({dir : p.dirname, name : p.basename, ext : '.html'});
     }))
     .pipe(gulp.dest(outDir + '/blog'))
     .pipe(browserSync.stream());

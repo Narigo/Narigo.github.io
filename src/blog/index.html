@@ -5,6 +5,8 @@
   <title>Blog test</title>
 </head>
 <body>
-{{> posts }}
+{{#each posts}}
+<a href="{{dir}}/{{name}}{{ext}}">{{name}}</a>
+{{/each}}
 </body>
 </html>
