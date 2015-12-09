@@ -1,1 +1,3 @@
-console.log('hello.');
+import world from './test';
+
+console.log('hello ' + world);

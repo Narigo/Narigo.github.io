@@ -1,14 +1,17 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var del = require('del');
 var handlebars = require('gulp-compile-handlebars');
 var ghPages = require('gulp-gh-pages');
 var markdown = require('gulp-markdown');
+var path = require('path');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var through = require('through2');
+var webpack = require('webpack');
 
 gulp.task('build:assets', copyAssets);
 gulp.task('build:blog:posts', compileBlogPosts);
@@ -16,6 +19,7 @@ gulp.task('build:blog', ['build:blog:posts'], createBlogIndex);
 gulp.task('build:js', browserifyJs);
 gulp.task('build:scss', compileSass);
 gulp.task('build', ['build:assets', 'build:blog', 'build:js', 'build:scss']);
+gulp.task('webpack', webpackTask);
 
 gulp.task('dev', ['build'], watcher);
 gulp.task('deploy', ['build'], deploy);
@@ -35,6 +39,39 @@ function watcher() {
   gulp.watch('src/blog/**', ['build:blog']);
   gulp.watch('src/js/**', ['build:js']);
   gulp.watch('src/scss/*.scss', ['build:scss']);
+}
+
+function webpackTask(callback) {
+  var compiler = webpack({
+    entry : "./src/js/app.js",
+    output : {
+      path : outDir,
+      filename : "bundle.js"
+    },
+    module : {
+      loaders : [{
+        loader : "babel-loader",
+
+        test : /\.jsx?$/,
+
+        include : [
+          path.resolve(__dirname, 'src')
+        ],
+
+        query : {
+          presets : ['es2015']
+        }
+      }]
+    }
+  });
+
+  compiler.run(function (err, stats) {
+    if (err) throw new gutil.PluginError("webpack", err);
+    gutil.log("[webpack]", stats.toString({
+      // output options
+    }));
+    callback();
+  });
 }
 
 function copyAssets() {
@@ -57,25 +94,19 @@ function createBlogIndex() {
 function compileBlogPosts() {
   return gulp.src(['src/blog/posts/**/*.md'])
     .pipe(through.obj(function (file, enc, callback) {
-      console.log('args:', file.contents.toString());
       var post = /^.*#+\s*(.*?)[\r\n]+([\s\S]*?)(?:[\r\n]{2,}|$)/m.exec(file.contents.toString());
       if (post) {
-        console.log(post);
         posts.push({
           link : file.dirname + '/' + file.basename + '.html',
           title : post[1],
           short : post[2]
         });
-      } else {
-        console.log(file);
       }
-      console.log('through through!');
       this.push(file);
       callback();
     }))
     .pipe(markdown())
     .pipe(rename(function (p) {
-      console.log('in rename!', p);
       var matched = /^(\d{4})-(\d\d)-(\d\d)-(.*)$/.exec(p.basename);
       p.dirname = matched ? matched.slice(1, 4).join('/') : p.dirname;
       p.basename = matched ? matched[4] : p.basename;
