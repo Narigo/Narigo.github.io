@@ -12,22 +12,23 @@ var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var through = require('through2');
 var webpack = require('webpack');
-
-gulp.task('build:assets', copyAssets);
-gulp.task('build:blog:posts', compileBlogPosts);
-gulp.task('build:blog', ['build:blog:posts'], createBlogIndex);
-gulp.task('build:js', browserifyJs);
-gulp.task('build:scss', compileSass);
-gulp.task('build', ['build:assets', 'build:blog', 'build:js', 'build:scss']);
-gulp.task('webpack', webpackTask);
+var webpackConfig = require('./webpack.config');
 
 gulp.task('dev', ['build'], watcher);
 gulp.task('deploy', ['build'], deploy);
-
 gulp.task('clean', cleaner);
+
+gulp.task('build', ['build:assets', 'build:blog', 'build:webpack']);
+gulp.task('build:assets', copyAssets);
+gulp.task('build:blog:posts', compileBlogPosts);
+gulp.task('build:blog', ['build:blog:posts'], createBlogIndex);
+//gulp.task('build:scss', compileSass);
+gulp.task('build:webpack', webpackTask);
 
 var outDir = 'out';
 var posts = [];
+var devConfig = webpackConfig(outDir);
+var devCompiler = webpack(devConfig);
 
 function watcher() {
   browserSync({
@@ -35,37 +36,14 @@ function watcher() {
     open : false
   });
 
-  gulp.watch('src/assets/**', ['build:assets']);
   gulp.watch('src/blog/**', ['build:blog']);
-  gulp.watch('src/js/**', ['build:js']);
-  gulp.watch('src/scss/*.scss', ['build:scss']);
+  gulp.watch('src/assets/**', ['build:assets']);
+  //gulp.watch('src/scss/**', ['build:scss']);
+  gulp.watch('src/**', ['build:webpack']);
 }
 
 function webpackTask(callback) {
-  var compiler = webpack({
-    entry : "./src/js/app.js",
-    output : {
-      path : outDir,
-      filename : "bundle.js"
-    },
-    module : {
-      loaders : [{
-        loader : "babel-loader",
-
-        test : /\.jsx?$/,
-
-        include : [
-          path.resolve(__dirname, 'src')
-        ],
-
-        query : {
-          presets : ['es2015']
-        }
-      }]
-    }
-  });
-
-  compiler.run(function (err, stats) {
+  devCompiler.run(function (err, stats) {
     if (err) throw new gutil.PluginError("webpack", err);
     gutil.log("[webpack]", stats.toString({
       // output options
@@ -116,7 +94,7 @@ function compileBlogPosts() {
 }
 
 function compileSass() {
-  return gulp.src(['src/scss/*.scss', '!src/scss/_*.scss'])
+  return gulp.src(['src/scss/**/*.scss', '!src/scss/**/_*.scss'])
     .pipe(sass())
     .on('error', function (err) {
       console.log('error occured:', err);
@@ -124,18 +102,6 @@ function compileSass() {
     })
     .pipe(gulp.dest(outDir + '/css'))
     .pipe(browserSync.stream());
-}
-
-function browserifyJs() {
-  return browserify('./src/js/app.js')
-    .bundle()
-    .on('error', function (err) {
-      console.log('error occured:', err);
-      this.emit('end');
-    })
-    .pipe(source('app.js'))
-    .pipe(gulp.dest(outDir + '/js'))
-    .pipe(browserSync.stream())
 }
 
 function cleaner(cb) {
