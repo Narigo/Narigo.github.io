@@ -12,7 +12,7 @@ var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var through = require('through2');
 var webpack = require('webpack');
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require('./webpack.main.config');
 
 gulp.task('dev', ['build'], watcher);
 gulp.task('deploy', ['build'], deploy);
