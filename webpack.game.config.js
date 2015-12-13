@@ -2,7 +2,8 @@ var path = require('path');
 
 module.exports = {
   entry : {
-    game : './src/game/index.js'
+    index : path.resolve(__dirname, 'src/game/index.html'),
+    game : path.resolve(__dirname, 'src/game/index.js')
   },
   output : {
     path : 'out-game',
@@ -11,12 +12,21 @@ module.exports = {
   module : {
     loaders : [{
       test : /\.jsx?$/,
-      loader : 'babel-loader',
-      include : [path.resolve(__dirname, 'src/game')],
-      query : {presets : ['es2015']}
+      exclude : /node_modules/,
+      loader : 'react-hot'
+    }, {
+      test : /\.jsx?$/,
+      exclude : /node_modules/,
+      loader : 'babel', query : {presets : ['es2015', 'react']}
     }, {
       test : /\.scss$/,
-      loader : ['style', 'css', 'sass']
+      loaders : ['style', 'css', 'sass']
+    }, {
+      test : /\.html$/,
+      loader : "file?name=[name].[ext]"
     }]
+  },
+  resolve : {
+    extensions : ['', '.js', '.jsx']
   }
 };
