@@ -1,18 +1,18 @@
 import React from 'react';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux';
-import NextTickButton from './components/NextTickButton';
-import nextState from './redux/tickReducer';
+import reducer from './redux/index';
+import NextTickButtonComponent from './components/NextTickButton';
+import HeroComponent from './components/Hero';
+import { connect } from 'react-redux';
 
-let store = createStore(nextState);
+const Hero = connect((state) => state.hero)(HeroComponent);
+const NextTickButton = connect((state) => state.tick)(NextTickButtonComponent);
 
 export default React.createClass({
   render () {
     return (
       <div className="game">
-        <Provider store={store}>
-          <NextTickButton />
-        </Provider>
+        <Hero />
+        <NextTickButton />
       </div>
     );
   }

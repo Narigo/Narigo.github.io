@@ -1,17 +1,15 @@
-import { NEXT_TICK } from '../actions';
-
-const initialState = {
-  tickNr: 0
+const initialTickState = {
+  nr : 0
 };
 
-export default function nextState(state = initialState, action) {
-  switch (action) {
-    case NEXT_TICK:
+export default function nextState(tickState = initialTickState, action) {
+  switch (action.type) {
+    case 'NEXT_TICK':
       return {
-        ...state,
-        tickNr : state.tickNr + 1
+        ...tickState,
+        nr : tickState.nr + 1
       };
     default:
-      return state;
+      return tickState;
   }
 }
