@@ -5,11 +5,10 @@ let NextTickButton = React.createClass({
 
   dealDamage() {
     const dispatch = this.props.dispatch;
-    dispatch(drainLife(10));
+    dispatch(drainLife(this.props.id, 10));
   },
 
   render() {
-    console.log('hero props:', this.props);
     return (
       <div className="hero">
         <div>Attack: <span>{this.props.attack}</span></div>
