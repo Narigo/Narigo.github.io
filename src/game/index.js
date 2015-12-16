@@ -6,16 +6,16 @@ import './general.scss';
 
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux';
-import nextState from './redux/index';
+import reducer from './redux/index';
 
-let store = createStore(nextState);
+let store = createStore(reducer);
 console.log(store.getState());
 
-let Game = connect(nextState)(Layout);
+let GameLayout = connect(reducer)(Layout);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Game/>
+    <GameLayout/>
   </Provider>,
   document.getElementById('react')
 );
