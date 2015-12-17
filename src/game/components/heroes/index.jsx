@@ -1,12 +1,20 @@
 import React from 'react';
 import Immutable from 'immutable';
 import Hero from './Hero';
-import { addHero } from './actions';
+import { addHero, removeHero, drainLife } from './actions';
 
 let Heroes = React.createClass({
 
   addHero() {
     return this.props.dispatch(addHero(10, 100));
+  },
+
+  removeHero(id) {
+    return () => this.props.dispatch(removeHero(id));
+  },
+
+  dealDamage(id) {
+    return () => this.props.dispatch(drainLife(id, 10));
   },
 
   render() {
@@ -15,9 +23,13 @@ let Heroes = React.createClass({
       <section className="heroes">
         <h2>Your Heroes</h2>
         <ol>
-          {heroes.map((hero, idx) => {
+          {heroes.valueSeq().map((hero, idx) => {
             return (
-              <li><Hero key={idx} id={idx} dispatch={this.props.dispatch} attack={hero.get('attack')}
+              <li><Hero key={'hero-' + idx}
+                        id={idx}
+                        dealDamage={this.dealDamage(idx)}
+                        remove={this.removeHero(idx)}
+                        attack={hero.get('attack')}
                         hitpoints={hero.get('hitpoints')}/></li>
             );
           })}
