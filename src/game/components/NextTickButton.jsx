@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { NEXT_TICK } from '../actions';
+import { COMPUTE_NEXT_TICK, NEXT_TICK } from '../actions';
 
 let NextTickButton = React.createClass({
 
   computeNextTick() {
     const dispatch = this.props.dispatch;
-    dispatch(NEXT_TICK);
+    dispatch(COMPUTE_NEXT_TICK);
+    setTimeout(function() {
+      dispatch(NEXT_TICK);
+    }, 2000);
   },
 
   render() {
