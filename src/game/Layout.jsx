@@ -1,5 +1,5 @@
 import React from 'react';
-import NextTickButtonComponent from './components/NextTickButton';
+import NextTickButtonComponent from './components/tick/NextTickButton';
 import HeroesModule from './components/heroes/index';
 import { connect } from 'react-redux';
 

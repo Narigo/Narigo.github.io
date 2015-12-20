@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { COMPUTE_NEXT_TICK, NEXT_TICK } from '../actions';
+import { COMPUTE_NEXT_TICK, NEXT_TICK } from './actions';
 
 let NextTickButton = React.createClass({
 
