@@ -5,9 +5,11 @@ let NextTickButton = React.createClass({
 
   computeNextTick() {
     const dispatch = this.props.dispatch;
+    this.refs.button.disabled = true;
     dispatch(COMPUTE_NEXT_TICK);
-    setTimeout(function() {
+    setTimeout(() => {
       dispatch(NEXT_TICK);
+      this.refs.button.disabled = false;
     }, 2000);
   },
 
@@ -16,7 +18,7 @@ let NextTickButton = React.createClass({
     return (
       <div className="tick">
         <div>Current tick: <span>{this.props.nr}</span></div>
-        <div onClick={this.computeNextTick}>Click for next Tick</div>
+        <button ref="button" onClick={this.computeNextTick}>Click for next Tick</button>
       </div>
     );
   }
