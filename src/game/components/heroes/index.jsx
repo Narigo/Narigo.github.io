@@ -19,13 +19,15 @@ let Heroes = React.createClass({
 
   render() {
     let heroes = Immutable.fromJS(this.props.heroes);
+    console.log('newest heroes', this.props.heroes);
     return (
       <section className="heroes">
         <h2>Your Heroes</h2>
         <ol>
-          {heroes.valueSeq().map((hero, idx) => {
+          {heroes.entrySeq().map(([idx, hero]) => {
+            console.log('hero=', hero);
             return (
-              <li><Hero key={'hero-' + idx}
+              <li><Hero key={idx}
                         id={idx}
                         dealDamage={this.dealDamage(idx)}
                         remove={this.removeHero(idx)}
