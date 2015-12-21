@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { drainLife, removeHero } from './actions';
 
-let NextTickButton = React.createClass({
+let Hero = React.createClass({
 
   componentWillMount() {
     console.log('added a hero', this.props.id);
@@ -23,4 +23,4 @@ let NextTickButton = React.createClass({
   }
 });
 
-export default NextTickButton;
+export default Hero;

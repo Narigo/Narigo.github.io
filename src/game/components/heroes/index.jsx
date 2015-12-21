@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import { connect } from 'react-redux';
 import Hero from './Hero';
 import { addHero, removeHero, drainLife } from './actions';
 
@@ -43,4 +44,6 @@ let Heroes = React.createClass({
 
 });
 
-export default Heroes;
+export default connect(state => {
+  return {heroes : state.heroes};
+})(Heroes);

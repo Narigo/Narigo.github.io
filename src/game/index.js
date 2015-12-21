@@ -4,18 +4,24 @@ import Layout from './Layout';
 
 import './general.scss';
 
-import { createStore } from 'redux'
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import loggerMiddleware from 'redux-logger';
 import reducer from './redux/index';
 
+//const createStoreWithMiddleware = applyMiddleware([
+//  thunkMiddleware,
+//  loggerMiddleware
+//])(createStore);
+
+//let store = createStoreWithMiddleware(reducer);
 let store = createStore(reducer);
 console.log(store.getState());
 
-let GameLayout = connect(reducer)(Layout);
-
 ReactDOM.render(
   <Provider store={store}>
-    <GameLayout/>
+    <Layout/>
   </Provider>,
   document.getElementById('react')
 );

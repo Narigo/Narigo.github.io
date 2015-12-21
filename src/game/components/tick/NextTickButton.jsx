@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { COMPUTE_NEXT_TICK, NEXT_TICK } from './actions';
 
 let NextTickButton = React.createClass({
@@ -24,4 +25,8 @@ let NextTickButton = React.createClass({
   }
 });
 
-export default NextTickButton;
+export default connect(state => {
+  return {
+    tick : state.tick
+  };
+})(NextTickButton);
