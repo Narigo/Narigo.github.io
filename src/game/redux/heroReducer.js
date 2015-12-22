@@ -1,6 +1,9 @@
 import Immutable from 'immutable';
 
-const initialHeroState = {};
+const initialHeroState = {
+  availablePoints : 0,
+  heroes : {}
+};
 
 let lastId = 0;
 
@@ -11,21 +14,39 @@ export default function nextState(state = initialHeroState, action) {
       let hero = action.hero;
       lastId = lastId + 1;
       hero.id = lastId;
-      newState = Object.assign({}, state);
-      newState[hero.id] = hero;
+      newState = {
+        ...state,
+        heroes : {
+          ...state.heroes,
+          [hero.id] : hero
+        }
+      };
       console.log('adding hero', hero.id);
       return newState;
+
     case 'REMOVE_HERO':
       console.log('removing hero', action.heroId);
-      newState = Object.assign({}, state);
-      delete newState[action.heroId];
+      newState = {
+        ...state,
+        heroes : {
+          ...state.heroes
+        }
+      };
+      delete newState.heroes[action.heroId];
       return newState;
+
     case 'DRAIN_LIFE':
       console.log('draining life of hero', action.heroId);
-      newState = Object.assign({}, state);
-      let newHero = Object.assign({}, newState[action.heroId]);
-      newHero.hitpoints -= action.amount;
-      newState[action.heroId] = newHero;
+      newState = {
+        ...state,
+        heroes : {
+          ...state.heroes,
+          [action.heroId] : {
+            ...state.heroes[action.heroId],
+            hitpoints : state.heroes[action.heroId].hitpoints - action.amount
+          }
+        }
+      };
       return newState;
     default:
       return state;

@@ -20,18 +20,21 @@ let Heroes = React.createClass({
 
   render() {
     let heroes = Immutable.fromJS(this.props.heroes);
-    console.log('newest heroes', this.props.heroes);
+    console.log('newest heroes', heroes);
     return (
       <section className="heroes">
         <h2>Your Heroes</h2>
+        <div className="">
+          You have <span className="available-points">{this.props.availablePoints}</span> points available.
+        </div>
         <ol>
-          {heroes.entrySeq().map(([idx, hero]) => {
+          {heroes.entrySeq().map(([id, hero]) => {
             console.log('hero=', hero);
             return (
-              <li><Hero key={idx}
-                        id={idx}
-                        dealDamage={this.dealDamage(idx)}
-                        remove={this.removeHero(idx)}
+              <li><Hero key={id}
+                        id={id}
+                        dealDamage={this.dealDamage(id)}
+                        remove={this.removeHero(id)}
                         attack={hero.get('attack')}
                         hitpoints={hero.get('hitpoints')}/></li>
             );
@@ -46,5 +49,5 @@ let Heroes = React.createClass({
 
 export default connect(state => {
   console.log('got a state in heroes to connect', state);
-  return {heroes : state.heroes};
+  return {availablePoints : state.heroes.availablePoints, heroes : state.heroes.heroes};
 })(Heroes);
