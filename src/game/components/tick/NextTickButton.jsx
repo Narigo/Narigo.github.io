@@ -1,32 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { COMPUTE_NEXT_TICK, NEXT_TICK } from './actions';
+import { computeNextTick } from './actions';
 
 let NextTickButton = React.createClass({
 
   computeNextTick() {
-    const dispatch = this.props.dispatch;
-    this.refs.button.disabled = true;
-    dispatch(COMPUTE_NEXT_TICK);
-    setTimeout(() => {
-      dispatch(NEXT_TICK);
-      this.refs.button.disabled = false;
-    }, 2000);
+    console.log('dispatching computation of next tick');
+    this.props.dispatch(computeNextTick());
+    console.log('tick props after dispatch:', this.props);
   },
 
   render() {
-    console.log(this.props);
+    console.log('tick props: ', this.props);
     return (
       <div className="tick">
         <div>Current tick: <span>{this.props.nr}</span></div>
-        <button ref="button" onClick={this.computeNextTick}>Click for next Tick</button>
+        <button disabled={this.props.isComputing} onClick={this.computeNextTick}>Click for next Tick
+        </button>
       </div>
     );
   }
 });
 
 export default connect(state => {
-  return {
-    tick : state.tick
-  };
+  console.log('got a state in tick to connect', state);
+  return state.tick;
 })(NextTickButton);

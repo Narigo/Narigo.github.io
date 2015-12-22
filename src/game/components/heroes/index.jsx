@@ -45,5 +45,6 @@ let Heroes = React.createClass({
 });
 
 export default connect(state => {
+  console.log('got a state in heroes to connect', state);
   return {heroes : state.heroes};
 })(Heroes);
