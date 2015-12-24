@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import reducer from './redux/index';
+import reducer from './redux';
 
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, createLogger())(createStore);
 
