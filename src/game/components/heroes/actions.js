@@ -22,3 +22,10 @@ export const removeHero = (heroId) => {
     heroId
   };
 };
+
+export function incrementHeroPoints(amount) {
+  return {
+    type : 'INCREMENT_POINTS',
+    amount
+  };
+}
