@@ -29,3 +29,15 @@ export function incrementHeroPoints(amount) {
     amount
   };
 }
+
+export function createHero(attack, hitpoints, cost) {
+  return (dispatch, getState) => {
+    console.log('dispatching compute_next_tick', dispatch, getState());
+
+    dispatch({
+      type : 'DECREMENT_POINTS',
+      amount : cost
+    });
+    dispatch(addHero(attack, hitpoints));
+  };
+}

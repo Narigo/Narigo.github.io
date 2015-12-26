@@ -2,12 +2,12 @@ import React from 'react';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Hero from './Hero';
-import { addHero, removeHero, drainLife } from './actions';
+import { createHero, removeHero, drainLife } from './actions';
 
 let Heroes = React.createClass({
 
   addHero() {
-    return this.props.dispatch(addHero(10, 100));
+    return this.props.dispatch(createHero(10, 100, 1));
   },
 
   removeHero(id) {
