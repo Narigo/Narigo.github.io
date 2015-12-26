@@ -9,6 +9,7 @@ let lastId = 0;
 
 export default function nextState(state = initialHeroState, action) {
   let newState;
+
   switch (action.type) {
     case 'INCREMENT_POINTS':
       newState = {
@@ -16,12 +17,14 @@ export default function nextState(state = initialHeroState, action) {
         availablePoints: state.availablePoints + action.amount
       };
       return newState;
+
     case 'DECREMENT_POINTS':
       newState = {
         ...state,
         availablePoints: state.availablePoints - action.amount
       };
       return newState;
+
     case 'ADD_HERO':
       let hero = action.hero;
       lastId = lastId + 1;
@@ -60,6 +63,7 @@ export default function nextState(state = initialHeroState, action) {
         }
       };
       return newState;
+
     default:
       return state;
   }
