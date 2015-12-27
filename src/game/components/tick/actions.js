@@ -17,7 +17,7 @@ export function computeNextTick() {
         dispatch(incrementHeroPoints(1));
         console.log('resolve promise with dispatching next_tick', dispatch, getState());
         resolve(dispatch(NEXT_TICK));
-      }, 2000);
+      }, 200);
     });
   }
 }
