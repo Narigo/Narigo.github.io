@@ -49,5 +49,5 @@ let Heroes = React.createClass({
 
 export default connect(state => {
   console.log('got a state in heroes to connect', state);
-  return {availablePoints : state.heroes.availablePoints, heroes : state.heroes.heroes};
+  return {availablePoints : state.account.heroes.availablePoints, heroes : state.account.heroes.heroes};
 })(Heroes);

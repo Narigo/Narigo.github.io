@@ -3,7 +3,9 @@ const LOGIN = {
   account : {
     id : 'test',
     name : 'Tester'
-  }
+  },
+  heroes : {},
+  tick : {}
 };
 
 const TRY_LOGIN = {
@@ -16,14 +18,20 @@ const LOGOUT = {
   accountId : 'test'
 };
 
-export function login() {
-  console.log()
-  return (dispatch) => {
-    dispatch(TRY_LOGIN);
-    setTimeout(() => {
-      dispatch(LOGIN);
-    }, 200);
+function setHeroes() {
+  return {
+    type : 'SET_HEROES',
+    availablePoints : 1,
+    heroes : {}
   };
+}
+
+export function login(dispatch) {
+  dispatch(TRY_LOGIN);
+  setTimeout(() => {
+    dispatch(LOGIN);
+    dispatch(setHeroes());
+  }, 200);
 }
 
 export function logout() {

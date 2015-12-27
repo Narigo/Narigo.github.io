@@ -4,7 +4,7 @@ import Layout from './Layout';
 
 import './general.scss';
 
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
@@ -15,11 +15,9 @@ const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, createLogger(
 let store = createStoreWithMiddleware(reducer);
 console.log('initial state:', store.getState());
 
-let GameLayout = connect(state => state.account)(Layout);
-
 ReactDOM.render(
   <Provider store={store}>
-    <GameLayout/>
+    <Layout/>
   </Provider>,
   document.getElementById('react')
 );

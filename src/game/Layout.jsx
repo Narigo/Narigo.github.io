@@ -1,15 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NextTickButton from './components/tick/NextTickButton';
 import Heroes from './components/heroes';
-import { login } from './components/account/actions';
+import Login from './components/account/Login';
 
-export default React.createClass({
-  login() {
-    console.log('login pressed');
-    login()(this.props.dispatch);
-  },
-
+let Layout = React.createClass({
   render () {
+    console.log('layout props', this.props);
     if (this.props.isLoggedIn) {
       return (
         <div className="game">
@@ -20,9 +17,11 @@ export default React.createClass({
     } else {
       return (
         <div className="login">
-          <button onClick={this.login}>Login</button>
+          <Login/>
         </div>
       );
     }
   }
 });
+
+export default connect(state => state.account.data)(Layout);

@@ -1,5 +1,3 @@
-import Immutable from 'immutable';
-
 const initialHeroState = {
   availablePoints : 0,
   heroes : {}
@@ -14,16 +12,22 @@ export default function nextState(state = initialHeroState, action) {
     case 'INCREMENT_POINTS':
       newState = {
         ...state,
-        availablePoints: state.availablePoints + action.amount
+        availablePoints : state.availablePoints + action.amount
       };
       return newState;
 
     case 'DECREMENT_POINTS':
       newState = {
         ...state,
-        availablePoints: state.availablePoints - action.amount
+        availablePoints : state.availablePoints - action.amount
       };
       return newState;
+
+    case 'SET_HEROES' :
+      return {
+        availablePoints : state.availablePoints,
+        heroes : state.heroes
+      };
 
     case 'ADD_HERO':
       let hero = action.hero;
