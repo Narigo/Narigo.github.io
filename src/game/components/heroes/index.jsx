@@ -4,10 +4,16 @@ import { connect } from 'react-redux';
 import Hero from './Hero';
 import { createHero, removeHero, drainLife } from './actions';
 
+const standardHero = {
+  attack: 10,
+  hitpoints: 100,
+  cost: 1
+};
+
 let Heroes = React.createClass({
 
   addHero() {
-    return this.props.dispatch(createHero(10, 100, 1));
+    return this.props.dispatch(createHero(standardHero));
   },
 
   removeHero(id) {
@@ -24,7 +30,7 @@ let Heroes = React.createClass({
     return (
       <section className="heroes">
         <h2>Your Heroes</h2>
-        <div className="">
+        <div className="meta">
           You have <span className="available-points">{this.props.availablePoints}</span> points available.
         </div>
         <ol>
@@ -40,7 +46,7 @@ let Heroes = React.createClass({
             );
           })}
         </ol>
-        <button onClick={this.addHero}>Click to add hero</button>
+        <button onClick={this.addHero} disabled={this.props.availablePoints < standardHero.cost}>Click to add hero</button>
       </section>
     );
   }

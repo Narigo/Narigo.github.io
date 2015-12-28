@@ -30,16 +30,16 @@ export function incrementHeroPoints(amount) {
   };
 }
 
-export function createHero(attack, hitpoints, cost) {
+export function createHero(hero) {
   return (dispatch, getState) => {
     console.log('dispatching createHero', dispatch, getState());
 
-    if (getState().account.heroes.availablePoints >= cost) {
+    if (getState().account.heroes.availablePoints >= hero.cost) {
       dispatch({
         type : 'DECREMENT_POINTS',
-        amount : cost
+        amount : hero.cost
       });
-      dispatch(addHero(attack, hitpoints));
+      dispatch(addHero(hero.attack, hero.hitpoints));
     }
   };
 }
