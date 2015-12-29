@@ -5,9 +5,9 @@ import Hero from './Hero';
 import { createHero, removeHero, dealDamage } from './actions';
 
 const standardHero = {
-  attack: 10,
-  hitpoints: 100,
-  cost: 1
+  attack : 10,
+  hitpoints : 100,
+  cost : 1
 };
 
 let Heroes = React.createClass({
@@ -35,18 +35,20 @@ let Heroes = React.createClass({
         </div>
         <ol>
           {heroes.entrySeq().map(([id, hero]) => {
-            console.log('hero=', hero);
+            console.log('hero=', id, hero);
             return (
-              <li><Hero key={id}
-                        id={id}
-                        dealDamage={this.dealDamage(hero)}
-                        remove={this.removeHero(id)}
-                        attack={hero.get('attack')}
-                        hitpoints={hero.get('hitpoints')}/></li>
+              <li key={id}>
+                <Hero id={id}
+                      dealDamage={this.dealDamage(hero)}
+                      remove={this.removeHero(id)}
+                      attack={hero.get('attack')}
+                      hitpoints={hero.get('hitpoints')}/>
+              </li>
             );
           })}
         </ol>
-        <button onClick={this.addHero} disabled={this.props.availablePoints < standardHero.cost}>Click to add hero</button>
+        <button onClick={this.addHero} disabled={this.props.availablePoints < standardHero.cost}>Click to add hero
+        </button>
       </section>
     );
   }
