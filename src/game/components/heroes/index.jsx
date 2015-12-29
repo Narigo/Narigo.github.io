@@ -2,7 +2,7 @@ import React from 'react';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Hero from './Hero';
-import { createHero, removeHero, drainLife } from './actions';
+import { createHero, removeHero, dealDamage } from './actions';
 
 const standardHero = {
   attack: 10,
@@ -20,8 +20,8 @@ let Heroes = React.createClass({
     return () => this.props.dispatch(removeHero(id));
   },
 
-  dealDamage(id) {
-    return () => this.props.dispatch(drainLife(id, 10));
+  dealDamage(hero) {
+    return () => this.props.dispatch(dealDamage(hero, 10));
   },
 
   render() {
@@ -39,7 +39,7 @@ let Heroes = React.createClass({
             return (
               <li><Hero key={id}
                         id={id}
-                        dealDamage={this.dealDamage(id)}
+                        dealDamage={this.dealDamage(hero)}
                         remove={this.removeHero(id)}
                         attack={hero.get('attack')}
                         hitpoints={hero.get('hitpoints')}/></li>

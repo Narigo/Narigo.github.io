@@ -30,6 +30,20 @@ export function incrementHeroPoints(amount) {
   };
 }
 
+export function dealDamage(hero, damage) {
+  let h = hero.toJS();
+  return (dispatch, getState) => {
+    console.log('dispatching dealDamage', h, getState(), getState().account.heroes.heroes[h.id].hitpoints);
+
+    console.log('hp > damage?', getState().account.heroes.heroes[h.id].hitpoints, damage);
+    if (getState().account.heroes.heroes[h.id].hitpoints > damage) {
+      dispatch(drainLife(h.id, damage));
+    } else {
+      dispatch(removeHero(h.id));
+    }
+  };
+}
+
 export function createHero(hero) {
   return (dispatch, getState) => {
     console.log('dispatching createHero', dispatch, getState());
