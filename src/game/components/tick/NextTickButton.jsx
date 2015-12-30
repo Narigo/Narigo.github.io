@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { computeNextTick } from './actions';
+import './tick.scss';
 
 let NextTickButton = React.createClass({
 

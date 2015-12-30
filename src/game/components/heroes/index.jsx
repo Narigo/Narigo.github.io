@@ -5,7 +5,10 @@ import Hero from './Hero';
 import { createHero, removeHero, dealDamage } from './actions';
 
 const standardHero = {
-  attack : 10,
+  strength : 1,
+  dexterity : 1,
+  intelligence : 1,
+  vitality : 1,
   hitpoints : 100,
   cost : 1
 };
@@ -41,8 +44,12 @@ let Heroes = React.createClass({
                 <Hero id={id}
                       dealDamage={this.dealDamage(hero)}
                       remove={this.removeHero(id)}
-                      attack={hero.get('attack')}
-                      hitpoints={hero.get('hitpoints')}/>
+                      strength={hero.get('strength')}
+                      dexterity={hero.get('dexterity')}
+                      intelligence={hero.get('intelligence')}
+                      vitality={hero.get('vitality')}
+                      hitpoints={hero.get('hitpoints')}
+                />
               </li>
             );
           })}

@@ -6,13 +6,10 @@ export const drainLife = (id, amount) => {
   };
 };
 
-export const addHero = (attack, hitpoints) => {
+export const addHero = (hero) => {
   return {
     type : 'ADD_HERO',
-    hero : {
-      attack,
-      hitpoints
-    }
+    hero
   };
 };
 
@@ -53,7 +50,7 @@ export function createHero(hero) {
         type : 'DECREMENT_POINTS',
         amount : hero.cost
       });
-      dispatch(addHero(hero.attack, hero.hitpoints));
+      dispatch(addHero(hero));
     }
   };
 }
