@@ -27,6 +27,15 @@ export function incrementHeroPoints(amount) {
   };
 }
 
+export function increaseAttribute(heroId, attribute, amount) {
+  return {
+    type : 'INCREASE_ATTRIBUTE',
+    heroId,
+    attribute,
+    amount
+  }
+}
+
 export function dealDamage(hero, damage) {
   let h = hero.toJS();
   return (dispatch, getState) => {

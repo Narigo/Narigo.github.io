@@ -23,6 +23,19 @@ export default function nextState(state = initialHeroState, action) {
       };
       return newState;
 
+    case 'INCREASE_ATTRIBUTE':
+      newState = {
+        ...state,
+        heroes : {
+          ...state.heroes,
+          [state.heroes[action.heroId]] : {
+            ...state.heroes[action.heroId],
+            [action.attribute] : state.heroes[action.heroId][action.attribute] + action.amount
+          }
+        }
+      };
+      return newState;
+
     case 'SET_HEROES' :
       return {
         availablePoints : state.availablePoints,
