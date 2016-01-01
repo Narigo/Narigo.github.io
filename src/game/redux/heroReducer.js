@@ -28,7 +28,7 @@ export default function nextState(state = initialHeroState, action) {
         ...state,
         heroes : {
           ...state.heroes,
-          [state.heroes[action.heroId]] : {
+          [action.heroId] : {
             ...state.heroes[action.heroId],
             [action.attribute] : state.heroes[action.heroId][action.attribute] + action.amount
           }
