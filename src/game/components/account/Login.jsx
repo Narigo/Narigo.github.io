@@ -19,4 +19,8 @@ let Login = React.createClass({
 
 });
 
+Login.propTypes = {
+  dispatch : React.PropTypes.func.isRequired
+};
+
 export default connect(state => state.account)(Login);

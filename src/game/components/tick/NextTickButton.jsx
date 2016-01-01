@@ -23,6 +23,10 @@ let NextTickButton = React.createClass({
   }
 });
 
+NextTickButton.propTypes = {
+  dispatch : React.PropTypes.func.isRequired
+};
+
 export default connect(state => {
   console.log('got a state in tick to connect', state);
   return state.tick;

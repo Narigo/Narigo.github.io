@@ -49,4 +49,14 @@ let Hero = React.createClass({
   }
 });
 
+Hero.propTypes = {
+  strength : React.PropTypes.number.isRequired,
+  dexterity : React.PropTypes.number.isRequired,
+  intelligence : React.PropTypes.number.isRequired,
+  vitality : React.PropTypes.number.isRequired,
+  hitpoints : React.PropTypes.number.isRequired,
+  dealDamage : React.PropTypes.func.isRequired,
+  remove : React.PropTypes.func.isRequired
+};
+
 export default Hero;

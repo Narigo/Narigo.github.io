@@ -73,6 +73,12 @@ let Heroes = React.createClass({
 
 });
 
+Heroes.propTypes = {
+  dispatch : React.PropTypes.func.isRequired,
+  availablePoints : React.PropTypes.number.isRequired,
+  heroes : React.PropTypes.object.isRequired
+};
+
 export default connect(state => {
   console.log('got a state in heroes to connect', state);
   return {availablePoints : state.account.heroes.availablePoints, heroes : state.account.heroes.heroes};
