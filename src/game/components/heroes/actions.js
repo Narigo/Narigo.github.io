@@ -36,16 +36,14 @@ export function increaseAttribute(heroId, attribute, amount) {
   }
 }
 
-export function dealDamage(hero, damage) {
-  let h = hero.toJS();
+export function dealDamage(id, damage) {
   return (dispatch, getState) => {
-    console.log('dispatching dealDamage', h, getState(), getState().account.heroes.heroes[h.id].hitpoints);
+    console.log('dispatching dealDamage', getState());
 
-    console.log('hp > damage?', getState().account.heroes.heroes[h.id].hitpoints, damage);
-    if (getState().account.heroes.heroes[h.id].hitpoints > damage) {
-      dispatch(drainLife(h.id, damage));
+    if (getState().account.heroes.heroes[id].hitpoints > damage) {
+      dispatch(drainLife(id, damage));
     } else {
-      dispatch(removeHero(h.id));
+      dispatch(removeHero(id));
     }
   };
 }

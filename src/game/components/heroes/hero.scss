@@ -13,6 +13,10 @@
       .stat {
         display: flex;
         justify-content: space-between;
+
+        .key, .value, .add {
+          width: 33%;
+        }
       }
     }
 

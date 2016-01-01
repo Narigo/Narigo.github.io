@@ -23,8 +23,8 @@ let Heroes = React.createClass({
     return () => this.props.dispatch(removeHero(id));
   },
 
-  dealDamage(hero) {
-    return () => this.props.dispatch(dealDamage(hero, 10));
+  dealDamage(id) {
+    return () => this.props.dispatch(dealDamage(id, 10));
   },
 
   increaseAttribute(id) {
@@ -52,7 +52,7 @@ let Heroes = React.createClass({
             return (
               <li key={id}>
                 <Hero id={id}
-                      dealDamage={this.dealDamage(hero)}
+                      dealDamage={this.dealDamage(id)}
                       remove={this.removeHero(id)}
                       strength={hero.get('strength')}
                       dexterity={hero.get('dexterity')}
