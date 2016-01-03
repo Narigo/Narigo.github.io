@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { computeNextTick } from './actions';
+import { computeNextTick, stopTicking } from './actions';
 import './tick.scss';
 
 let NextTickButton = React.createClass({
@@ -11,12 +11,17 @@ let NextTickButton = React.createClass({
     console.log('tick props after dispatch:', this.props);
   },
 
+  stopTicking() {
+    this.props.dispatch(stopTicking());
+  },
+
   render() {
     console.log('tick props: ', this.props);
     return (
       <div className="tick">
         <div>Current tick: <span>{this.props.nr}</span></div>
         <button disabled={this.props.isComputing} onClick={this.computeNextTick}>(Re-)Start ticks</button>
+        <button disabled={this.props.isComputing} onClick={this.stopTicking}>Stop ticks</button>
       </div>
     );
   }

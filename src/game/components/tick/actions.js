@@ -1,7 +1,7 @@
 import { incrementHeroPoints } from '../heroes/actions';
 
 const COMPUTE_TICK_DURATION = 200;
-const DEFAULT_TICK_TIMEOUT = 5000;
+const DEFAULT_TICK_TIMEOUT = 500;
 let timerId = null;
 
 export const NEXT_TICK = {
@@ -20,6 +20,15 @@ function nextTickIn(timeout, nextIn) {
       }, timeout);
     });
   };
+}
+
+export function stopTicking() {
+  return (dispatch, getState) => {
+    if (timerId !== null) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+  }
 }
 
 export function computeNextTick(timeout = DEFAULT_TICK_TIMEOUT) {
