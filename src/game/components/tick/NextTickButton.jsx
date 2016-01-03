@@ -16,8 +16,7 @@ let NextTickButton = React.createClass({
     return (
       <div className="tick">
         <div>Current tick: <span>{this.props.nr}</span></div>
-        <button disabled={this.props.isComputing} onClick={this.computeNextTick}>Click for next Tick
-        </button>
+        <button disabled={this.props.isComputing} onClick={this.computeNextTick}>(Re-)Start ticks</button>
       </div>
     );
   }
