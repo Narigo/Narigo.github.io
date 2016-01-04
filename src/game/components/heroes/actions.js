@@ -27,6 +27,13 @@ export function incrementHeroPoints(amount) {
   };
 }
 
+export function decrementHeroPoints(amount) {
+  return {
+    type : 'DECREMENT_POINTS',
+    amount
+  };
+}
+
 export function increaseAttribute(heroId, attribute, amount) {
   return {
     type : 'INCREASE_ATTRIBUTE',
@@ -53,10 +60,7 @@ export function createHero(hero) {
     console.log('dispatching createHero', dispatch, getState());
 
     if (getState().account.heroes.availablePoints >= hero.cost) {
-      dispatch({
-        type : 'DECREMENT_POINTS',
-        amount : hero.cost
-      });
+      dispatch(decrementHeroPoints(hero.cost));
       dispatch(addHero(hero));
     }
   };

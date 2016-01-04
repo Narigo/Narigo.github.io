@@ -2,7 +2,7 @@ import React from 'react';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Hero from './Hero';
-import { createHero, increaseAttribute, removeHero, dealDamage } from './actions';
+import { createHero, decrementHeroPoints, increaseAttribute, removeHero, dealDamage } from './actions';
 
 const standardHero = {
   strength : 1,
@@ -30,6 +30,7 @@ let Heroes = React.createClass({
   increaseAttribute(id) {
     return (attr) => {
       if (this.props.availablePoints > 0) {
+        this.props.dispatch(decrementHeroPoints(1));
         this.props.dispatch(increaseAttribute(id, attr, 1));
       } else {
         console.log('not enough points available');
