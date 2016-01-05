@@ -73,9 +73,17 @@ function compileBlogPosts() {
   return gulp.src(['src/blog/posts/**/*.md'])
     .pipe(through.obj(function (file, enc, callback) {
       var post = /^.*#+\s*(.*?)[\r\n]+([\s\S]*?)(?:[\r\n]{2,}|$)/m.exec(file.contents.toString());
+      var filePath = path.parse(file.path);
+      console.log('md file from blogpost:', file, filePath);
       if (post) {
+        var matched = /^(\d{4})-(\d\d)-(\d\d)-(.*)\.md$/.exec(filePath.base);
+        var link = {
+          dir : (matched ? matched.slice(1, 4).join('/') : filePath.dir),
+          base : (matched ? matched[4] : filePath.base)
+        };
+
         posts.push({
-          link : file.dirname + '/' + file.basename + '.html',
+          link : link.dir + '/' + link.base + '.html',
           title : post[1],
           short : post[2]
         });
