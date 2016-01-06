@@ -13,6 +13,13 @@ var source = require('vinyl-source-stream');
 var through = require('through2');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.main.config');
+var webpackGameConfig = require('./webpack.game.config');
+
+var outDir = 'out';
+var posts = [];
+var devConfig = webpackConfig(outDir);
+var devCompiler = webpack(devConfig);
+var gameCompiler = webpack(webpackGameConfig);
 
 gulp.task('dev', ['build'], watcher);
 gulp.task('deploy', ['build'], deploy);
@@ -23,12 +30,9 @@ gulp.task('build:assets', copyAssets);
 gulp.task('build:blog:posts', compileBlogPosts);
 gulp.task('build:blog', ['build:blog:posts'], createBlogIndex);
 //gulp.task('build:scss', compileSass);
-gulp.task('build:webpack', webpackTask);
-
-var outDir = 'out';
-var posts = [];
-var devConfig = webpackConfig(outDir);
-var devCompiler = webpack(devConfig);
+gulp.task('build:webpack:main', webpackTask(devCompiler));
+gulp.task('build:webpack:game', webpackTask(gameCompiler));
+gulp.task('build:webpack', ['build:webpack:game', 'build:webpack:main']);
 
 function watcher() {
   browserSync({
@@ -39,17 +43,19 @@ function watcher() {
   gulp.watch('src/blog/**', ['build:blog']);
   gulp.watch('src/assets/**', ['build:assets']);
   //gulp.watch('src/scss/**', ['build:scss']);
-  gulp.watch('src/**', ['build:webpack']);
+  gulp.watch(['src/**', '!src/assets/**', '!src/blog/**'], ['build:webpack']);
 }
 
-function webpackTask(callback) {
-  devCompiler.run(function (err, stats) {
-    if (err) throw new gutil.PluginError("webpack", err);
-    gutil.log("[webpack]", stats.toString({
-      // output options
-    }));
-    callback();
-  });
+function webpackTask(compiler) {
+  return function (callback) {
+    compiler.run(function (err, stats) {
+      if (err) throw new gutil.PluginError("webpack", err);
+      gutil.log("[webpack]", stats.toString({
+        // output options
+      }));
+      callback();
+    });
+  };
 }
 
 function copyAssets() {
