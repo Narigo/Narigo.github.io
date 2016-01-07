@@ -79,17 +79,13 @@ function compileBlogPosts() {
   return gulp.src(['src/blog/posts/**/*.md'])
     .pipe(through.obj(function (file, enc, callback) {
       var post = /^.*#+\s*(.*?)[\r\n]+([\s\S]*?)(?:[\r\n]{2,}|$)/m.exec(file.contents.toString());
-      var filePath = path.parse(file.path);
+      var filePath = compatPath(path.parse(file.path));
       console.log('md file from blogpost:', file, filePath);
       if (post) {
-        var matched = /^(\d{4})-(\d\d)-(\d\d)-(.*)\.md$/.exec(filePath.base);
-        var link = {
-          dir : (matched ? matched.slice(1, 4).join('/') : filePath.dir),
-          base : (matched ? matched[4] : filePath.base)
-        };
+        pathToBlogPath(filePath);
 
         posts.push({
-          link : link.dir + '/' + link.base + '.html',
+          link : filePath.dirname + '/' + filePath.basename + '.html',
           title : post[1],
           short : post[2]
         });
@@ -98,13 +94,24 @@ function compileBlogPosts() {
       callback();
     }))
     .pipe(markdown())
-    .pipe(rename(function (p) {
-      var matched = /^(\d{4})-(\d\d)-(\d\d)-(.*)$/.exec(p.basename);
-      p.dirname = matched ? matched.slice(1, 4).join('/') : p.dirname;
-      p.basename = matched ? matched[4] : p.basename;
-    }))
+    .pipe(rename(pathToBlogPath))
     .pipe(gulp.dest(outDir + '/blog'))
     .pipe(browserSync.stream());
+
+  function compatPath(p) {
+    return {
+      dirname : p.dir,
+      basename : p.base,
+      extname : p.ext
+    };
+  }
+
+  function pathToBlogPath(p) {
+    var matched = /^(\d{4})-(\d\d)-(\d\d)-(.*)(?:\.md)?$/.exec(p.basename);
+    p.dirname = (matched ? matched.slice(1, 4).join('/') : p.dirname);
+    p.basename = (matched ? matched[4] : p.basename);
+    console.log('path to blog path ->', p);
+  }
 }
 
 function compileSass() {
