@@ -42,7 +42,6 @@ function watcher() {
 
   gulp.watch('src/blog/**', ['build:blog']);
   gulp.watch('src/assets/**', ['build:assets']);
-  //gulp.watch('src/scss/**', ['build:scss']);
   gulp.watch(['src/**', '!src/assets/**', '!src/blog/**'], ['build:webpack']);
 }
 

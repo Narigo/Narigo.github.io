@@ -6,7 +6,7 @@ module.exports = {
     game : path.resolve(__dirname, 'src/game/index.js')
   },
   output : {
-    path : 'out-game',
+    path : 'out/game',
     filename : 'js/[name].js'
   },
   module : {
