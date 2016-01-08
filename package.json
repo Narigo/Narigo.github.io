@@ -6,7 +6,6 @@
   "scripts": {
     "clean": "gulp clean",
     "dev": "gulp dev",
-    "game": "webpack-dev-server --hot --inline --config webpack.game.config.js --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joern Bernhardt",
