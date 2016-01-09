@@ -1,8 +1,10 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var del = require('del');
+var Handlebars = require('handlebars');
 var handlebars = require('gulp-compile-handlebars');
 var ghPages = require('gulp-gh-pages');
 var markdown = require('gulp-markdown');
@@ -93,6 +95,7 @@ function compileBlogPosts() {
       callback();
     }))
     .pipe(markdown())
+    .pipe(applyTemplate('src/blog/posts/post.html'))
     .pipe(rename(pathToBlogPath))
     .pipe(gulp.dest(outDir + '/blog'))
     .pipe(browserSync.stream());
@@ -103,6 +106,21 @@ function compileBlogPosts() {
       basename : p.base,
       extname : p.ext
     };
+  }
+
+  function applyTemplate(templateFile) {
+    var template = fs.readFileSync(templateFile).toString();
+    var tpl = Handlebars.compile(template);
+
+    return through.obj(function (file, enc, cb) {
+      var data = {
+        title : 'blubb',
+        post : file.contents.toString()
+      };
+      file.contents = new Buffer(tpl(data), 'utf8');
+
+      this.push(file);
+    });
   }
 
   function pathToBlogPath(p) {

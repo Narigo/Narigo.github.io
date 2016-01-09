@@ -2,19 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog test</title>
+  <title>{{title}}</title>
 </head>
 <body>
-{{#each posts}}
 <article class="post">
-  <a href="{{link}}">
-    <h2 class="title">{{title}}</h2>
-
-    <div class="short-description">
-      {{short}}
-    </div>
-  </a>
+  {{{post}}}
 </article>
-{{/each}}
 </body>
 </html>
