@@ -85,11 +85,14 @@ function compileBlogPosts() {
       if (post) {
         pathToBlogPath(filePath);
 
-        posts.push({
+        var postMeta = {
           link : filePath.dirname + '/' + filePath.basename + '.html',
           title : post[1],
           short : post[2]
-        });
+        };
+
+        posts.push(postMeta);
+        file.post = postMeta;
       }
       this.push(file);
       callback();
@@ -114,7 +117,7 @@ function compileBlogPosts() {
 
     return through.obj(function (file, enc, cb) {
       var data = {
-        title : 'blubb',
+        meta : file.post ? file.post : {},
         post : file.contents.toString()
       };
       file.contents = new Buffer(tpl(data), 'utf8');
