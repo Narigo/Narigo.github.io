@@ -31,7 +31,6 @@ gulp.task('build', ['build:assets', 'build:blog', 'build:webpack']);
 gulp.task('build:assets', copyAssets);
 gulp.task('build:blog:posts', compileBlogPosts);
 gulp.task('build:blog', ['build:blog:posts'], createBlogIndex);
-//gulp.task('build:scss', compileSass);
 gulp.task('build:webpack:main', webpackTask(devCompiler));
 gulp.task('build:webpack:game', webpackTask(gameCompiler));
 gulp.task('build:webpack', ['build:webpack:game', 'build:webpack:main']);
@@ -132,17 +131,6 @@ function compileBlogPosts() {
     p.basename = (matched ? matched[4] : p.basename);
     console.log('path to blog path ->', p);
   }
-}
-
-function compileSass() {
-  return gulp.src(['src/scss/**/*.scss', '!src/scss/**/_*.scss'])
-    .pipe(sass())
-    .on('error', function (err) {
-      console.log('error occured:', err);
-      this.emit('end');
-    })
-    .pipe(gulp.dest(outDir + '/css'))
-    .pipe(browserSync.stream());
 }
 
 function cleaner(cb) {
