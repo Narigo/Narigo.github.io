@@ -2,6 +2,7 @@ import React from 'react';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Hero from './Hero';
+import { showMessage } from '../message/actions';
 import { createHero, decrementHeroPoints, increaseAttribute, removeHero, dealDamage } from './actions';
 
 const standardHero = {
@@ -33,14 +34,13 @@ let Heroes = React.createClass({
         this.props.dispatch(decrementHeroPoints(1));
         this.props.dispatch(increaseAttribute(id, attr, 1));
       } else {
-        console.log('not enough points available');
+        this.props.dispatch(showMessage('not enough points available'));
       }
     };
   },
 
   render() {
     let heroes = Immutable.fromJS(this.props.heroes);
-    console.log('newest heroes', heroes);
     return (
       <section className="heroes">
         <h2>Your Heroes</h2>

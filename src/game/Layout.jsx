@@ -1,8 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NextTickButton from './components/tick/NextTickButton';
+import Message from './components/message';
 import Heroes from './components/heroes';
 import Login from './components/account/Login';
+
+const MessageOverlay = connect(state => {
+  return {
+    message : state.account.data.message,
+    showMessage : state.account.data.showMessage
+  };
+})(Message);
 
 let Layout = React.createClass({
   render () {
@@ -10,6 +18,7 @@ let Layout = React.createClass({
     if (this.props.isLoggedIn) {
       return (
         <div className="game">
+          <MessageOverlay/>
           <Heroes/>
           <NextTickButton/>
         </div>

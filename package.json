@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "gulp clean",
     "dev": "gulp dev",
+    "game": "webpack-dev-server --hot --inline --config webpack.game.config.js --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joern Bernhardt",
@@ -15,6 +16,7 @@
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
     "browser-sync": "^2.10.0",
     "browserify": "^12.0.1",
     "css-loader": "^0.23.0",
