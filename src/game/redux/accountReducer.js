@@ -4,9 +4,7 @@ import heroReducer from './heroReducer';
 const initialAccountState = {
   id : 0,
   isLoggingIn : false,
-  isLoggedIn : false,
-  showMessage : false,
-  message : ''
+  isLoggedIn : false
 };
 
 function accountReducer(accountState = initialAccountState, action) {
@@ -35,19 +33,6 @@ function accountReducer(accountState = initialAccountState, action) {
         ...accountState,
         isLoggedIn : false,
         isLoggingIn : false
-      };
-
-    case 'SHOW_MESSAGE':
-      return {
-        ...accountState,
-        showMessage : true,
-        message: action.message
-      };
-
-    case 'DISMISS_MESSAGE':
-      return {
-        ...accountState,
-        showMessage : false
       };
 
     default:

@@ -1,5 +1,6 @@
 import React from 'react';
 import './message.scss';
+import { connect } from 'react-redux';
 
 let Message = React.createClass({
   render() {
@@ -7,6 +8,11 @@ let Message = React.createClass({
       return (
         <section className="message-overlay">
           <div className="text">{this.props.message}</div>
+          {this.props.buttons.map(function (button) {
+            return (
+              <button className="btn-ok" onclick={button.onPress}>{button.text}</button>
+            )
+          })}
         </section>
       );
     } else {
@@ -21,4 +27,6 @@ Message.propTypes = {
   showMessage : React.PropTypes.bool.isRequired
 };
 
-export default Message;
+export default connect(state => {
+  return state.flash;
+})(Message);
