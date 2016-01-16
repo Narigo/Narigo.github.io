@@ -5,20 +5,13 @@ import Message from './components/message';
 import Heroes from './components/heroes';
 import Login from './components/account/Login';
 
-const MessageOverlay = connect(state => {
-  return {
-    message : state.account.data.message,
-    showMessage : state.account.data.showMessage
-  };
-})(Message);
-
 let Layout = React.createClass({
   render () {
     console.log('layout props', this.props);
     if (this.props.isLoggedIn) {
       return (
         <div className="game">
-          <MessageOverlay/>
+          <Message/>
           <Heroes/>
           <NextTickButton/>
         </div>
