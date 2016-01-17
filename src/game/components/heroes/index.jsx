@@ -2,7 +2,7 @@ import React from 'react';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Hero from './Hero';
-import { showMessage } from '../message/actions';
+import { showMessage, dismissMessage } from '../message/actions';
 import { createHero, decrementHeroPoints, increaseAttribute, removeHero, dealDamage } from './actions';
 
 const standardHero = {
@@ -34,7 +34,22 @@ let Heroes = React.createClass({
         this.props.dispatch(decrementHeroPoints(1));
         this.props.dispatch(increaseAttribute(id, attr, 1));
       } else {
-        this.props.dispatch(showMessage('not enough points available'));
+        this.props.dispatch(showMessage({
+          text : 'Not enough points available!',
+          buttons : [{
+            text : 'No way!',
+            action : () => {
+              return (dispatch) => {
+                dispatch(showMessage({text : 'Sorry.'}));
+              };
+            }
+          }, {
+            text : 'Okay.',
+            action : () => {
+              return dismissMessage;
+            }
+          }]
+        }));
       }
     };
   },

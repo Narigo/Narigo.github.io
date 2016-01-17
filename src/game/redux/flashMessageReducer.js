@@ -14,8 +14,8 @@ function flashReducer(state = initialFlashState, action) {
         ...state,
         showMessage : true,
         closeable : action.closeable !== false,
-        message : action.message,
-        buttons : []
+        message : action.message || '[no message received]',
+        buttons : action.buttons || []
       };
 
     case 'DISMISS_MESSAGE':

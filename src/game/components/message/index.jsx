@@ -4,6 +4,13 @@ import { dismissMessage } from './actions';
 import { connect } from 'react-redux';
 
 let Message = React.createClass({
+
+  clickHandler(action) {
+    return () => {
+      this.props.dispatch(action());
+    }
+  },
+
   closeMessage() {
     console.log('hello in dismiss??');
     this.props.dispatch(dismissMessage);
@@ -17,10 +24,10 @@ let Message = React.createClass({
         <section className="message-overlay">
           {closeBtn}
           <div className="text">{this.props.message}</div>
-          {this.props.buttons.map(function (button) {
+          {this.props.buttons.map((button, id) => {
             return (
-              <button className="btn-ok" onclick={button.onPress}>{button.text}</button>
-            )
+              <button key={id} className="btn-ok" onClick={this.clickHandler(button.action)}>{button.text}</button>
+            );
           })}
         </section>
       );
