@@ -3,9 +3,7 @@ const LOGIN = {
   account : {
     id : 'test',
     name : 'Tester'
-  },
-  heroes : {},
-  tick : {}
+  }
 };
 
 const TRY_LOGIN = {

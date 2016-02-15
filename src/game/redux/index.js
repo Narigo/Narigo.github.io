@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import Immutable from 'immutable';
+import { combineReducers } from 'redux-immutable';
 
 import account from './accountReducer';
 import flash from './flashMessageReducer';

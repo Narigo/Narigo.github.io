@@ -1,85 +1,45 @@
-const initialHeroState = {
+import Immutable from 'immutable';
+
+const initialHeroState = Immutable.fromJS({
   availablePoints : 0,
   heroes : {}
-};
+});
 
 let lastId = 0;
 
 export default function nextState(state = initialHeroState, action) {
-  let newState;
 
   switch (action.type) {
     case 'INCREMENT_POINTS':
-      newState = {
-        ...state,
-        availablePoints : state.availablePoints + action.amount
-      };
-      return newState;
+      return state.update('availablePoints', v => v + action.amount);
 
     case 'DECREMENT_POINTS':
-      newState = {
-        ...state,
-        availablePoints : state.availablePoints - action.amount
-      };
-      return newState;
+      return state.update('availablePoints', v => v - action.amount);
 
     case 'INCREASE_ATTRIBUTE':
-      newState = {
-        ...state,
-        heroes : {
-          ...state.heroes,
-          [action.heroId] : {
-            ...state.heroes[action.heroId],
-            [action.attribute] : state.heroes[action.heroId][action.attribute] + action.amount
-          }
-        }
-      };
-      return newState;
+      console.log('increasing attribute', state);
+      return state.updateIn(['heroes', action.heroId, action.attribute], v => v + action.amount);
 
     case 'SET_HEROES' :
-      return {
-        availablePoints : state.availablePoints,
-        heroes : state.heroes
-      };
+      return state.merge({
+        availablePoints : action.availablePoints,
+        heroes : action.heroes
+      });
 
     case 'ADD_HERO':
       let hero = action.hero;
       lastId = lastId + 1;
       hero.id = lastId;
-      newState = {
-        ...state,
-        heroes : {
-          ...state.heroes,
-          [hero.id] : hero
-        }
-      };
       console.log('adding hero', hero.id);
-      return newState;
+      return state.updateIn(['heroes', hero.id], v => Immutable.fromJS(hero));
 
     case 'REMOVE_HERO':
       console.log('removing hero', action.heroId);
-      newState = {
-        ...state,
-        heroes : {
-          ...state.heroes
-        }
-      };
-      delete newState.heroes[action.heroId];
-      return newState;
+      return state.removeIn(['heroes', action.heroId]);
 
     case 'DRAIN_LIFE':
       console.log('draining life of hero', action.heroId);
-      newState = {
-        ...state,
-        heroes : {
-          ...state.heroes,
-          [action.heroId] : {
-            ...state.heroes[action.heroId],
-            hitpoints : state.heroes[action.heroId].hitpoints - action.amount
-          }
-        }
-      };
-      return newState;
+      return state.updateIn(['heroes', action.heroId, 'hitpoints'], v => v - action.amount);
 
     default:
       return state;

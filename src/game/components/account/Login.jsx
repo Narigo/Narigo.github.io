@@ -23,4 +23,4 @@ Login.propTypes = {
   dispatch : React.PropTypes.func.isRequired
 };
 
-export default connect(state => state.account)(Login);
+export default connect(state => state.get('account').toJS())(Login);

@@ -56,6 +56,7 @@ let Heroes = React.createClass({
 
   render() {
     let heroes = Immutable.fromJS(this.props.heroes);
+    console.log('render heroes', heroes);
     return (
       <section className="heroes">
         <h2>Your Heroes</h2>
@@ -63,8 +64,9 @@ let Heroes = React.createClass({
           You have <span className="available-points">{this.props.availablePoints}</span> points available.
         </div>
         <ol>
-          {heroes.entrySeq().map(([id, hero]) => {
-            console.log('hero=', id, hero);
+          {heroes.map((hero) => {
+            console.log('hero=', hero);
+            const id = hero.get('id');
             return (
               <li key={id}>
                 <Hero id={id}
@@ -96,6 +98,8 @@ Heroes.propTypes = {
 };
 
 export default connect(state => {
-  console.log('got a state in heroes to connect', state);
-  return {availablePoints : state.account.heroes.availablePoints, heroes : state.account.heroes.heroes};
+  const stateObj = state.toJS();
+  console.log('got a state in heroes to connect', stateObj);
+  console.log('heroState', state.getIn(['account', 'heroes']).toJS());
+  return state.getIn(['account', 'heroes']).toJS();
 })(Heroes);

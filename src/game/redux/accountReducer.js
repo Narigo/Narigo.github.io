@@ -1,39 +1,37 @@
-import { combineReducers } from 'redux';
+import Immutable from 'immutable';
+import { combineReducers } from 'redux-immutable';
 import heroReducer from './heroReducer';
 
-const initialAccountState = {
+const initialAccountState = Immutable.Map({
   id : 0,
   isLoggingIn : false,
   isLoggedIn : false
-};
+});
 
 function accountReducer(accountState = initialAccountState, action) {
-  console.log('reducer account called with ', accountState, action);
+  console.log('reducer account called with ', accountState.toJS(), action);
 
   switch (action.type) {
     case 'TRY_LOGIN':
-      return {
-        ...accountState,
+      return accountState.merge({
         id : 0,
         isLoggingIn : true,
         isLoggedIn : false
-      };
+      });
 
     case 'LOGIN':
-      return {
-        ...accountState,
+      return accountState.merge({
         id : action.account.id,
         name : action.account.name,
         isLoggingIn : false,
         isLoggedIn : true
-      };
+      });
 
     case 'LOGOUT':
-      return {
-        ...accountState,
+      return accountState.merge({
         isLoggedIn : false,
         isLoggingIn : false
-      };
+      });
 
     default:
       return accountState;

@@ -31,7 +31,7 @@
     "gulp-sass": "^2.1.0",
     "gulp-util": "^3.0.7",
     "handlebars": "^4.0.5",
-    "immutable": "^3.7.5",
+    "immutable": "^3.7.6",
     "node-sass": "^3.4.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
@@ -39,6 +39,7 @@
     "react-redux": "^4.0.1",
     "redux": "^3.0.5",
     "redux-devtools": "^2.1.5",
+    "redux-immutable": "^3.0.3",
     "redux-logger": "^2.3.1",
     "redux-thunk": "^1.0.2",
     "sass-loader": "^3.1.2",
@@ -47,5 +48,8 @@
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "redux-make-immutable": "^1.0.1"
   }
 }

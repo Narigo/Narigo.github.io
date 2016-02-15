@@ -47,7 +47,7 @@ export function dealDamage(id, damage) {
   return (dispatch, getState) => {
     console.log('dispatching dealDamage', getState());
 
-    if (getState().account.heroes.heroes[id].hitpoints > damage) {
+    if (getState().getIn(['account', 'heroes', 'heroes', id, 'hitpoints']) > damage) {
       dispatch(drainLife(id, damage));
     } else {
       dispatch(removeHero(id));
@@ -59,7 +59,7 @@ export function createHero(hero) {
   return (dispatch, getState) => {
     console.log('dispatching createHero', dispatch, getState());
 
-    if (getState().account.heroes.availablePoints >= hero.cost) {
+    if (getState().getIn(['account', 'heroes', 'availablePoints']) >= hero.cost) {
       dispatch(decrementHeroPoints(hero.cost));
       dispatch(addHero(hero));
     }

@@ -46,5 +46,5 @@ Message.propTypes = {
 };
 
 export default connect(state => {
-  return state.flash;
+  return state.get('flash').toJS();
 })(Message);

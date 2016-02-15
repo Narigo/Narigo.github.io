@@ -26,4 +26,4 @@ let Layout = React.createClass({
   }
 });
 
-export default connect(state => state.account.data)(Layout);
+export default connect(state => state.get('account').get('data').toJS())(Layout);

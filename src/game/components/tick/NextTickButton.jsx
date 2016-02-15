@@ -33,5 +33,5 @@ NextTickButton.propTypes = {
 
 export default connect(state => {
   console.log('got a state in tick to connect', state);
-  return state.tick;
+  return state.get('tick').toJS();
 })(NextTickButton);
