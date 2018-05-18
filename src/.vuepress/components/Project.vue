@@ -4,8 +4,7 @@
       <img class="project-image" :src="image" />
       <div class="project-text">
         <h2>{{ name }}</h2>
-        <div class="description">{{ description }}</div>
-        <div class="long-description" v-if="$children.length > 0">test?</div>
+        <div class="description"><slot /></div>
       </div>
     </a>
   </div>
