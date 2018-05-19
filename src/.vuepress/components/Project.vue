@@ -1,12 +1,11 @@
 <template>
-  <div class="project">
-    <a :href="link">
-      <img class="project-image" :src="image" />
-      <div class="project-text">
-        <h2>{{ name }}</h2>
-        <div class="description"><slot /></div>
-      </div>
-    </a>
+  <div :class="'project' + (showDetails ? ' active' : '')" v-on:click="this.toggleProject">
+    <img class="project-image" :src="image" />
+    <div class="project-text">
+      <h2>{{ name }}</h2>
+      <div class="description">{{ description }}</div>
+      <div class="details"><slot /></div>
+    </div>
   </div>
 </template>
 
@@ -14,11 +13,22 @@
 import defaultImage from "../assets/jb.jpg";
 
 export default {
+  data() {
+    return {
+      showDetails: false
+    };
+  },
   props: {
     description: {},
     image: { default: defaultImage },
     link: {},
     name: {}
+  },
+  methods: {
+    toggleProject() {
+      console.log("toggling!", this.showDetails);
+      this.showDetails = !this.showDetails;
+    }
   }
 };
 </script>
@@ -29,11 +39,35 @@ export default {
   width: 250px;
 }
 
+.project.active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 1);
+}
+
 .project-text > h2 {
   margin: 0;
   padding: 10px 20px;
 }
-.project-text > * {
+
+.project-text > h2,
+.project-text > .description {
   padding: 20px;
+}
+
+.project.active .description,
+.project-text > .details {
+  display: none;
+}
+
+.project.active .project-text > .details {
+  display: block;
 }
 </style>
