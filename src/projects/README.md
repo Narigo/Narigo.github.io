@@ -20,6 +20,13 @@ Es folgt eine unvollständige Liste von Projekten.
 
   </Project>
 
+- <Project name="compose.us" image="//placekitten.com/250/300" link="https://compose.us" description="Arbeit, Arbeit.">
+	[compose.us](https://compose.us) ist mein neues Unternehmen. Unsere dortige Produktentwicklung finanzieren wir über Projekte.
+
+	Ich bin gespannt, wie es in Zukunft laufen wird!
+
+  </Project>
+
 - <Project name="Dropping Spray" image="//placekitten.com/250/300" link="https://narigo.github.io/dropping-spray" description="Ein realistisches Spray, das auch mal tropft.">
   So ziemlich jedes Grafik-Programm hat ein Sprühwerkzeug im Angebot. Leider lässt keines der Programme auch mal Tropfen entstehen, wenn längere Zeit auf der gleichen Stelle gesprüht wird. Diese kleine Demo zeigt, dass man so etwas aber auch bauen kann.
 
