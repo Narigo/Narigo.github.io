@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="header">
-      <img class="image" src="../assets/jb.jpg" />
+      <img class="image" :src="$withBase('/jb.jpg')" />
       <div class="texts">
         <div class="big">{{ this.$page.frontmatter.hi }}</div>
         <div class="slogan">{{ this.$page.frontmatter.slogan }}</div>

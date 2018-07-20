@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import defaultImage from "../assets/jb.jpg";
+import defaultImage from "../public/jb.jpg";
 
 export default {
   data() {
