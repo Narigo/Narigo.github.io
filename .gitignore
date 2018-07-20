@@ -81,3 +81,4 @@ node_modules
 .publish
 
 dist/
+.DS_Store
