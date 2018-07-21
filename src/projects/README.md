@@ -20,7 +20,7 @@ Es folgt eine unvollständige Liste von Projekten.
 
   </Project>
 
-- <Project name="compose.us" image="//placekitten.com/250/300" link="https://compose.us" description="Arbeit, Arbeit.">
+- <Project name="compose.us" link="https://compose.us" description="Arbeit, Arbeit.">
 	[compose.us](https://compose.us) ist mein neues Unternehmen. Unsere dortige Produktentwicklung finanzieren wir über Projekte.
 
 	Ich bin gespannt, wie es in Zukunft laufen wird!

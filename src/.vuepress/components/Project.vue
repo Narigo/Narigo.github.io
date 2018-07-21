@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import defaultImage from "../public/jb.jpg";
-
 export default {
   data() {
     return {
@@ -20,7 +18,7 @@ export default {
   },
   props: {
     description: {},
-    image: { default: defaultImage },
+    image: { default: "//placekitten.com/250/300" },
     link: {},
     name: {}
   },
