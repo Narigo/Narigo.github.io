@@ -1,6 +1,6 @@
 <template>
   <div :class="'project' + (showDetails ? ' active' : '')" v-on:click="this.toggleProject">
-    <img class="project-image" :src="image" />
+    <div class="project-image"><img :src="image" /></div>
     <div class="project-text">
       <h2>{{ name }}</h2>
       <div class="description">{{ description }}</div>
@@ -48,6 +48,12 @@ export default {
   padding: 25px;
   z-index: 1000;
   background-color: rgba(255, 255, 255, 1);
+}
+
+.project-image {
+	min-height: 250px;
+	display: flex;
+	align-items: center;
 }
 
 .project-text > h2 {
