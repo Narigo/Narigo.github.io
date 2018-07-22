@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     toggleProject() {
-      console.log("toggling!", this.showDetails);
       this.showDetails = !this.showDetails;
     }
   }
