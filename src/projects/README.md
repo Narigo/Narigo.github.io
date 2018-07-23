@@ -8,7 +8,7 @@
 
 Es folgt eine unvollständige Liste von Projekten.
 
-- <Project name="Reimemonster" image="//placekitten.com/250/300" link="https://narigo.github.io/reimemonster" description="Ein kleines Hilfsmittel, um Gedichte zu schreiben.">
+- <Project name="Reimemonster" image="/reimemonster.png" link="https://narigo.github.io/reimemonster" description="Ein kleines Hilfsmittel, um Gedichte zu schreiben.">
   Mit **Reimemonster** lassen sich Gedichte einfacher schreiben: Beim Markieren von Wörtern werden möglich Reimvorschläge gemacht und die Anzahl der Silben werden am Rand angezeigt.
 
   </Project>
