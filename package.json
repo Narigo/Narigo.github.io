@@ -4,9 +4,8 @@
   "description": "Testing like always.",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev src",
-    "build": "vuepress build src",
-    "deploy": "npm run build && cd dist && git init && git add -A && git commit -sm'Deploy ['\"`date +'%Y-%m-%d %H:%M'`\"']' && git push -f git@github.com:Narigo/narigo.github.io.git master && cd -",
+    "dev": "vuepress dev src/",
+    "build": "vuepress build -d docs/ src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
