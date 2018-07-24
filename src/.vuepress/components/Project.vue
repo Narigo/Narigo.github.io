@@ -17,10 +17,19 @@ export default {
     };
   },
   props: {
-    description: {},
+    description: {
+      type: String,
+      required: true
+    },
     image: { default: "//placekitten.com/250/300" },
-    link: {},
-    name: {}
+    link: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     toggleProject() {
@@ -50,9 +59,9 @@ export default {
 }
 
 .project-image {
-	min-height: 250px;
-	display: flex;
-	align-items: center;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
 }
 
 .project-text > h2 {
