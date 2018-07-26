@@ -4,8 +4,9 @@
   "description": "Testing like always.",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev src/",
-    "build": "vuepress build -d dist/ src/ && mv dist/* . && rm -r dist/",
+		"build": "npm run clean && vuepress build -d dist/ _src/ && mv -f dist/* .",
+		"clean": "ls -1A | sed -E '/^(\\.git(ignore)?|_src|node_modules|README\\.md|package(-lock)?\\.json)$/d' | xargs rm -r",
+    "dev": "vuepress dev _src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
