@@ -13,7 +13,7 @@ Es folgt eine unvollständige Liste von Projekten.
 
   </Project>
 
-- <Project name="Charts" image="//placekitten.com/250/300" link="https://narigo.github.io/charts" description="Der Song, der an Deinem 14. Geburtstag auf Platz 1 war, soll angeblich Dein Leben definieren.">
+- <Project name="Charts" image="/charts.png" link="https://narigo.github.io/charts" description="Der Song, der an Deinem 14. Geburtstag auf Platz 1 war, soll angeblich Dein Leben definieren.">
 	Der Song, der an Deinem 14. Geburtstag auf Platz 1 war, soll angeblich Dein Leben definieren.
 
 	Mit diesem Tool lässt sich schnell herausfinden, welcher Song an einem bestimmten Datum in den Charts war.
