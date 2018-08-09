@@ -1,6 +1,6 @@
 <template>
   <div :class="'project' + (showDetails ? ' active' : '')" v-on:click="this.toggleProject">
-    <div class="project-image"><img :src="image" /></div>
+    <div class="project-image"><a :href="link"><img :src="image" /></a></div>
     <div class="project-text">
       <h2>{{ name }}</h2>
       <div class="description">{{ description }}</div>
