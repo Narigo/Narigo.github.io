@@ -27,8 +27,8 @@ Es folgt eine unvollständige Liste von Projekten.
 
   </Project>
 
-- <Project name="Dropping Spray" image="/dropping-spray.png" link="https://narigo.github.io/dropping-spray" description="Ein realistisches Spray, das auch mal tropft.">
-  So ziemlich jedes Grafik-Programm hat ein Sprühwerkzeug im Angebot. Leider lässt keines der Programme auch mal Tropfen entstehen, wenn längere Zeit auf der gleichen Stelle gesprüht wird. [Diese kleine Demo](https://narigo.github.io/dropping-spray) zeigt, dass man so etwas aber auch bauen kann.
+- <Project name="Dripping Spray" image="/dripping-spray.png" link="https://narigo.github.io/dripping-spray" description="Ein realistisches Spray, das auch mal tropft.">
+  So ziemlich jedes Grafik-Programm hat ein Sprühwerkzeug im Angebot. Leider lässt keines der Programme auch mal Tropfen entstehen, wenn längere Zeit auf der gleichen Stelle gesprüht wird. [Diese kleine Demo](https://narigo.github.io/dripping-spray) zeigt, dass man so etwas aber auch bauen kann.
 
   Es gibt auch einen [technischen Blogbeitrag über das tropfende Sprühwerkzeug](https://narigo.github.io/blog/2018/05/06/spray-with-drops/), der die zugrundeliegenden Ideen beschreibt. Das Tool sollte sich aufgrund der modularen Struktur auch in Programmen einbetten lassen.
 
