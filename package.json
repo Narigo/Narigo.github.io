@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && vuepress build -d dist/ _src/ && mv -f dist/* .",
-    "clean": "ls -1A | sed -E '/^(\\.git(ignore)?|_src|node_modules|README\\.md|package(-lock)?\\.json)$/d' | xargs rm -r",
+    "clean": "ls -1A | sed -E '/^(\\.git(ignore)?|_src|node_modules|Dockerfile|README\\.md|package(-lock)?\\.json)$/d' | xargs rm -r",
     "dev": "vuepress dev _src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/Narigo/Narigo.github.io#readme",
   "devDependencies": {
-    "vuepress": "^0.12.0"
+    "vuepress": "^1.5.2"
   }
 }
