@@ -1,7 +1,10 @@
 ---
 {
+    "home": true,
     "layout": "Homepage",
     "hi": "Hi!",
+    "navbar": true,
+    "sidebar": "auto",
     "slogan": "Ich bin Jörn."
 }
 ---

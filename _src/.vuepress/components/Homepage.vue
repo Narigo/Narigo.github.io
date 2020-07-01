@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <Navbar />
     <div class="header">
       <img class="image" :src="$withBase('/jb.jpg')" />
       <div class="texts">
@@ -7,9 +8,19 @@
         <div class="slogan">{{ this.$page.frontmatter.slogan }}</div>
       </div>
     </div>
-    <Content :custom="false"/>
+    <Content />
   </div>
 </template>
+
+<script>
+import Navbar from "@theme/components/Navbar.vue";
+
+export default {
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style scoped>
 .header {
@@ -25,9 +36,9 @@
 }
 
 .header .texts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header .big {
@@ -38,4 +49,3 @@
   font-size: 2rem;
 }
 </style>
-
