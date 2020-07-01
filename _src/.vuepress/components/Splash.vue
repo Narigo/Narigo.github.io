@@ -1,23 +1,26 @@
 <template>
   <div class="page">
-    <Navbar />
     <div class="header">
       <img class="image" :src="$withBase('/jb.jpg')" />
       <div class="texts">
-        <div class="big">{{ this.$page.frontmatter.hi }}</div>
-        <div class="slogan">{{ this.$page.frontmatter.slogan }}</div>
+        <div class="big">{{ this.$props.hi }}</div>
+        <div class="slogan">{{ this.$props.slogan }}</div>
       </div>
     </div>
-    <Content />
   </div>
 </template>
 
 <script>
-import Navbar from "@theme/components/Navbar.vue";
-
 export default {
-  components: {
-    Navbar,
+  props: {
+    hi: {
+      type: String,
+      required: true,
+    },
+    slogan: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>

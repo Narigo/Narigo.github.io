@@ -1,11 +1,11 @@
 <template>
-  <div class="page">
-    <Content :custom="false"/>
+  <div class="projects">
+    <slot />
   </div>
 </template>
 
 <style>
-ul {
+.projects {
   display: flex;
   flex-direction: row;
   align-content: space-between;
@@ -13,9 +13,8 @@ ul {
   list-style-type: none;
 }
 
-li {
+.projects > * {
   margin: 25px;
   width: 250px;
 }
 </style>
-

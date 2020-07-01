@@ -1,13 +1,5 @@
----
-{
-    "home": true,
-    "layout": "Homepage",
-    "hi": "Hi!",
-    "navbar": true,
-    "sidebar": "auto",
-    "slogan": "Ich bin Jörn."
-}
----
+<Splash hi="Hi!" slogan="Ich bin Jörn." />
+
 # Servus!
 
 Das ist eine meiner vielen Webseiten.
